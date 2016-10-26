@@ -4,18 +4,26 @@
   "description": "an implementation of Tic-Tac-Toe using Typescript and Phaser",
   "main": "dist/index.js",
   "scripts": {
+    "test": "webpack . && mocha --opts mocha.opts",
     "start": "webpack-dev-server",
-    "build": "rimraf ./dist && webpack -p"
+    "build": "rimraf ./dist && webpack -p",
+    "build2": "webpack -p"
   },
   "author": "Matthias Auer (mail@matthias-auer.net)",
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/node": "^6.0.46",
+    "chai": "^3.5.0",
     "copy-webpack-plugin": "^3.0.1",
     "expose-loader": "^0.7.1",
     "html-webpack-plugin": "^2.22.0",
+    "mocha": "^3.1.2",
+    "mocha-typescript": "^1.0.11",
     "phaser": "^2.6.2",
     "rimraf": "^2.5.4",
     "ts-loader": "^0.8.2",
-    "typescript": "^2.0.3",
+    "ts-node": "^1.6.0",
+    "typescript": "^2.0.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   }
