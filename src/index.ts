@@ -34,7 +34,6 @@ class SimpleGame {
 
     this.logo.inputEnabled = true;
     this.logo.input.pixelPerfectClick = true;
-    //this.logo.input.enabled = true;
 
     this.logo.anchor.setTo(0.5, 0.5);
     this.cursors = this.game.input.keyboard.createCursorKeys();
