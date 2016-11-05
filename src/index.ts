@@ -4,6 +4,8 @@
 import 'pixi';
 import 'p2';
 import * as Phaser from 'phaser';
+import {Standard} from './standard/standard'
+import {StandardController} from './standard/standard-controller'
 
 
   function listener() {
@@ -30,6 +32,9 @@ class SimpleGame {
   }
 
   create() {
+    var x:Standard = new Standard(this.game);
+    var y:StandardController = null;
+
     this.logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, "logo");
 
     this.logo.inputEnabled = true;

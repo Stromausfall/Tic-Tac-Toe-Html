@@ -7,6 +7,8 @@ import * as chai from 'chai';
 import * as Phaser from 'phaser';
 import {Standard} from './standard';
 
+declare var require: any
+
 const sinonChai = require("sinon-chai");
 
 chai.use(sinonChai);

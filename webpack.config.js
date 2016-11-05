@@ -13,16 +13,13 @@ var p2 = path.join(phaserModule, 'build/custom/p2.js');
 module.exports = {
   entry: {
       'vendor': './src/vendor.ts',
-      'app': './src/index.ts'
+      'app': ['./src/index.ts']
   },
   output: {
     pathInfo: true,
     filename: '[name].bundle.js',
     path: path.resolve('./dist'),
     publicPath: '/'
-  },
-  resolve: {
-    extensions: ['', '.js', '.ts'],
   },
   plugins: [
     new CopyWebpackPlugin([
@@ -33,7 +30,7 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: './index.html',
-      inject: 'body',
+      inject: 'body'
     }),
     new webpack.NoErrorsPlugin(),
     /* put code that won't change frequently during development into a separte .js file - this saves time in the dev cycle */
@@ -44,7 +41,7 @@ module.exports = {
       { test: /pixi\.js/, loader: 'expose?PIXI' },
       { test: /phaser-split\.js$/, loader: 'expose?Phaser' },
       { test: /p2\.js/, loader: 'expose?p2' },
-      { test: /\.ts?$/, loader: 'ts', exclude: '/node_modules/' }
+      { test: /\.ts$/, loader: 'ts', exclude: '/node_modules/' }
     ]
   },
   node: {
@@ -54,8 +51,10 @@ module.exports = {
     alias: {
       'phaser': phaser,
       'pixi': pixi,
-      'p2': p2,
-    }
+      'p2': p2
+    },
+    
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },
   devtool: 'source-map',
   devServer: {
