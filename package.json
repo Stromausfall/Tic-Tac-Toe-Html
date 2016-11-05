@@ -4,8 +4,8 @@
   "description": "an implementation of Tic-Tac-Toe using Typescript and Phaser",
   "main": "dist/app.bundle.js",
   "scripts": {
-    "test": "webpack --progress --display-error-details && mocha --opts mocha.opts",
-    "start": "webpack-dev-server --progress --display-error-details --content-base ./ --hot",
+    "test": "webpack --progress --display-error-details . && mocha --opts mocha.opts",
+    "dev": "webpack-dev-server --progress --display-error-details --content-base ./ --hot",
     "build": "rimraf ./dist && webpack -p --progress --display-error-details"
   },
   "author": "Matthias Auer (mail@matthias-auer.net)",
