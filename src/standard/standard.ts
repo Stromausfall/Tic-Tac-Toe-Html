@@ -3,13 +3,13 @@ import {StandardModel} from './standard-model';
 import {StandardController} from './standard-controller';
 
 export class Standard implements StandardView, StandardModel, StandardController {
-    private _game:Phaser.Game;
+    private _gameObjectFactory:Phaser.GameObjectFactory;
 
-    constructor(game:Phaser.Game) {
-        this._game = game;
+    getGameObjectFactory() : Phaser.GameObjectFactory {
+        return this._gameObjectFactory;
     }
 
-    get game() {
-        return this._game;
+    setGameObjectFactory(gameObjectFactory:Phaser.GameObjectFactory) : void {
+        this._gameObjectFactory = gameObjectFactory;
     }
 }

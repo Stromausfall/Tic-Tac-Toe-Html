@@ -32,7 +32,7 @@ class SimpleGame {
   }
 
   create() {
-    var x:Standard = new Standard(this.game);
+    var x:Standard = new Standard();
     var y:StandardController = null;
 
     this.logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, "logo");
