@@ -4,7 +4,9 @@
 import 'pixi';
 import 'p2';
 import * as Phaser from 'phaser';
+import {View} from './view/view'
 import {Standard} from './standard/standard'
+import {ImageConstants} from './view/image-constants';
 import {StandardController} from './standard/standard-controller'
 
 
@@ -16,7 +18,9 @@ class SimpleGame {
   game: Phaser.Game;
   logo: Phaser.Sprite;
   cursors: Phaser.CursorKeys;
-  logoInputHandler: Phaser.InputHandler;
+
+  standard:Standard;
+  view:View;
 
   constructor() {
     this.game = new Phaser.Game(800, 600, Phaser.AUTO, "content", this);
@@ -26,13 +30,20 @@ class SimpleGame {
     this.game.load.image("logo", "./assets/images/mushroom2.png");
 
     
-    this.game.load.image("tile_empty", "./assets/images/tile_empty.png");
-    this.game.load.image("tile_cross", "./assets/images/tile_cross.png");
-    this.game.load.image("tile_circle", "./assets/images/tile_circle.png");
+    this.game.load.image(ImageConstants.TILE_EMPTY, ImageConstants.TILE_EMPTY_FILE);
+    this.game.load.image(ImageConstants.TILE_CROSS, ImageConstants.TILE_CROSS_FILE);
+    this.game.load.image(ImageConstants.TILE_CIRCLE,  ImageConstants.TILE_CIRCLE_FILE);
   }
 
   create() {
-    var x:Standard = new Standard();
+    this.standard = new Standard();
+    this.standard.setGame(this.game);
+
+    this.view = new View(this.standard);
+    this.view.initialize();
+
+
+//this.game.stage.backgroundColor = "#FFFFFF";
     var y:StandardController = null;
 
     this.logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, "logo");

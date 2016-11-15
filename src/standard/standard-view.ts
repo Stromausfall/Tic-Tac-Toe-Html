@@ -1,4 +1,6 @@
+import {ModelView} from '../model/model-view';
 
 export interface StandardView {
-    getGameObjectFactory() : Phaser.GameObjectFactory;
+    getGame() : Phaser.Game;
+    getModel() : ModelView;
 }

@@ -1,15 +1,28 @@
+/// <reference path="../../node_modules/phaser/typescript/phaser.d.ts"/>
+/// <reference path="../../node_modules/phaser/typescript/pixi.d.ts"/>
+
 import {StandardView} from './standard-view';
 import {StandardModel} from './standard-model';
 import {StandardController} from './standard-controller';
+import {Model} from '../model/model';
 
 export class Standard implements StandardView, StandardModel, StandardController {
-    private _gameObjectFactory:Phaser.GameObjectFactory;
+    private _game:Phaser.Game;
+    private _model:Model;
 
-    getGameObjectFactory() : Phaser.GameObjectFactory {
-        return this._gameObjectFactory;
+    getGame() : Phaser.Game {
+        return this._game;
     }
 
-    setGameObjectFactory(gameObjectFactory:Phaser.GameObjectFactory) : void {
-        this._gameObjectFactory = gameObjectFactory;
+    getModel() : Model {
+        return this._model;
+    }
+
+    setGame(game:Phaser.Game) : void {
+        this._game = game;
+    }
+
+    setModel(model:Model) : void {
+        this._model = model;
     }
 }

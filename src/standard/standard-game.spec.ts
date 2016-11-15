@@ -7,12 +7,13 @@ import * as chai from 'chai';
 import * as Phaser from 'phaser';
 import {Standard} from './standard';
  
-@suite class StandardGameObjectFactorySpec {
-    @test "standard.getGameObjectFactory() value is assigned using the setter"() {
-        var gameObjectFactory:Phaser.GameObjectFactory =  <Phaser.GameObjectFactory> <any> {};
-        var standard:Standard = new Standard();
-        standard.setGameObjectFactory(gameObjectFactory)
+@suite class StandardGameSpec {
 
-        chai.expect(standard.getGameObjectFactory()).equals(gameObjectFactory)
+    @test "standard.getGame() value is assigned using the setter"() {
+        var game:Phaser.Game = <Phaser.Game><any>{};
+        var standard:Standard = new Standard();
+        standard.setGame(game);
+
+        chai.expect(standard.getGame()).equals(game)
      }
 }
