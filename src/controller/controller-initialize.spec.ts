@@ -5,9 +5,9 @@ import {Standard} from '../standard/standard';
 import {Model} from '../model/model';
 import {Controller} from './controller';
  
-@suite class ControllerTileClickedSpec {
+@suite class ControllerInitializeSpec {
 
-    @test "the tileClicked method changes the state of the corresponding entity"() {
+    @test "the initialize method changes the state of all tiles to 'empty'"() {
         var model:Model = <Model><any>{}
         var standard:Standard = new Standard();
         standard.setModel(model);
