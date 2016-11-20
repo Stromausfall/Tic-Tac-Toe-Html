@@ -1,6 +1,7 @@
 import {ControllerView} from './controller-view';
 import {StandardController} from '../standard/standard-controller';
 import {ModelController} from '../model/model-controller';
+import {ViewController} from '../view/view-controller';
 import {TileController} from '../model/tile/tile-controller';
 import {TileState} from '../model/tile/tile-state';
 
@@ -15,6 +16,10 @@ export class Controller implements ControllerView {
         return this._standard.getModel();
     }
 
+    private getView() : ViewController {
+        return this._standard.getView();
+    }
+
     tileClicked(x:number, y:number):void {
         var tile:TileController = this.getModel().getTile(x, y);
 
@@ -24,5 +29,6 @@ export class Controller implements ControllerView {
 
     initialize() : void {
         this.getModel().initialize();
+        this.getView().initialize();
     }
 }

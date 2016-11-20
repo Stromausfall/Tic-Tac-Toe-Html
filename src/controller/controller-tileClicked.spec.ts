@@ -5,14 +5,19 @@ import {Standard} from '../standard/standard';
 import {TileState} from '../model/tile/tile-state';
 import {TileController} from '../model/tile/tile-controller';
 import {Model} from '../model/model';
+import {View} from '../view/view';
 import {Controller} from './controller';
  
 @suite class ControllerTileClickedSpec {
 
     @test "the tileClicked method changes the state of the corresponding entity"() {
+        var view:View = <View><any>{
+            initialize() : void {}
+        }        
         var model:Model = new Model();
         var standard:Standard = new Standard();
         standard.setModel(model);
+        standard.setView(view);
         var controller:Controller = new Controller(standard);
 
         controller.initialize();

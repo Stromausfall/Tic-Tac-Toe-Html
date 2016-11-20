@@ -5,6 +5,8 @@ import 'pixi';
 import 'p2';
 import * as Phaser from 'phaser';
 import {View} from './view/view'
+import {Controller} from './controller/controller';
+import {Model} from './model/model';
 import {Standard} from './standard/standard'
 import {ImageConstants} from './view/image-constants';
 import {StandardController} from './standard/standard-controller'
@@ -20,7 +22,6 @@ class SimpleGame {
   cursors: Phaser.CursorKeys;
 
   standard:Standard;
-  view:View;
 
   constructor() {
     this.game = new Phaser.Game(800, 600, Phaser.AUTO, "content", this);
@@ -37,10 +38,18 @@ class SimpleGame {
 
   create() {
     this.standard = new Standard();
-    this.standard.setGame(this.game);
 
-    this.view = new View(this.standard);
-    this.view.initialize();
+    var model:Model = new Model();
+    var view:View = new View(this.standard);
+    var controller:Controller = new Controller(this.standard);
+
+    this.standard.setGame(this.game);
+    this.standard.setController(controller);
+    this.standard.setModel(model);
+
+
+
+    controller.initialize();
 
 
 //this.game.stage.backgroundColor = "#FFFFFF";
