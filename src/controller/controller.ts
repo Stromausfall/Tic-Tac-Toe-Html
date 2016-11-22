@@ -25,10 +25,11 @@ export class Controller implements ControllerView {
     }
 
     tileClicked(x:number, y:number):void {
-        var tile:TileController = this.getModel().getTile(x, y);
+        var currentPlayer:Player = this._players.peek();
 
-        // todo: the player/computer controller needs to do that...
-        tile.setState(TileState.Circle);
+        currentPlayer.tileClicked(x, y);
+
+        this.checkAndStartNextTurn();
     }
 
     initialize() : void {
