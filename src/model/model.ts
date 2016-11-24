@@ -2,9 +2,11 @@ import * as Collections from 'typescript-collections';
 import {ModelView} from './model-view';
 import {ModelController} from './model-controller';
 import {Tile} from './tile/tile';
+import {GameState} from './game-state';
 
 export class Model implements ModelView, ModelController {
-    _tiles:Collections.Dictionary<String, Tile> = null;
+    private _tiles:Collections.Dictionary<String, Tile> = null;
+    private _gameState:GameState = GameState.ONGOING;
 
     private getTileKey(x:number, y:number) : string {
         return x + "/" + y;
@@ -33,6 +35,10 @@ export class Model implements ModelView, ModelController {
         var tile:Tile = this._tiles.getValue(key);
         
         return tile;
+    }
+    
+    getGameState() : GameState {
+        return this._gameState
     }
 }
 
