@@ -6,6 +6,7 @@ import {ViewController} from '../view/view-controller';
 import {TileController} from '../model/tile/tile-controller';
 import {TileState} from '../model/tile/tile-state';
 import {Player} from '../controller/player/player';
+import {GameState} from '../model/game-state';
 
 export class Controller implements ControllerView {
     private _standard:StandardController;
@@ -25,11 +26,14 @@ export class Controller implements ControllerView {
     }
 
     tileClicked(x:number, y:number):void {
-        var currentPlayer:Player = this._players.peek();
+        // only if the game is still ongoing
+        if (this.getModel().getGameState() == GameState.ONGOING) {
+            var currentPlayer:Player = this._players.peek();
 
-        currentPlayer.tileClicked(x, y);
+            currentPlayer.tileClicked(x, y);
 
-        this.checkAndStartNextTurn();
+            this.checkAndStartNextTurn();
+        }
     }
 
     initialize() : void {
@@ -38,16 +42,19 @@ export class Controller implements ControllerView {
     }
 
     startTurnOfCurrentPlayer() : void {
-        var currentPlayer:Player = this._players.peek();
+        // only if the game is still ongoing
+        if (this.getModel().getGameState() == GameState.ONGOING) {
+            var currentPlayer:Player = this._players.peek();
 
-        // start the turn of the player
-        currentPlayer.startTurn();
+            // start the turn of the player
+            currentPlayer.startTurn();
 
-        // check if the turn already finished (if so start the turn of the next player)
-        this.checkAndStartNextTurn();
+            // check if the turn already finished (if so start the turn of the next player)
+            this.checkAndStartNextTurn();
+        }
     }
 
-    checkAndStartNextTurn() : void {
+    private checkAndStartNextTurn() : void {
         var currentPlayer:Player = this._players.peek();
 
         if (currentPlayer.isTurnFinished()) {

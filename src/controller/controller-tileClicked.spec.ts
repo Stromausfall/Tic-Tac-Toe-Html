@@ -44,4 +44,102 @@ import {Player} from './player/player';
         // expect the tile to be changed now
         chai.expect(tile.getState()).not.equals(TileState.Empty)
      }
+
+    @test "after the game is won - players can't interact anymore with the game"() {
+        var view:View = <View><any>{
+            initialize() : void {}
+        }        
+        var model:Model = new Model();
+        var standard:Standard = new Standard();
+        standard.setModel(model);
+        standard.setView(view);
+        var controller:Controller = new Controller(standard);
+        var player1:Player = this.createPlayer(false, model)
+        var player2:Player = this.createPlayer(false, model)
+        
+        var playerOneStartTurnSpy = sinon.spy(player1, 'startTurn');
+        var playerTwoStartTurnSpy = sinon.spy(player2, 'startTurn');
+        var playerOneTurnFinishedSpy = sinon.spy(player1, 'isTurnFinished');
+        var playerTwoTurnFinishedSpy = sinon.spy(player2, 'isTurnFinished');
+        var playerOneTileClickedSpy = sinon.spy(player1, 'tileClicked');
+        var playerTwoTileClickedSpy = sinon.spy(player2, 'tileClicked');        
+        controller.setPlayers(player1, player2);
+
+        // start the game
+        controller.initialize();
+        controller.startTurnOfCurrentPlayer();
+
+        // win the game
+        model.getTile(0, 0).setState(TileState.Circle);
+        model.getTile(1, 1).setState(TileState.Circle);
+        model.getTile(2, 2).setState(TileState.Circle);
+
+        // no more interaction should happen
+        chai.expect(playerOneStartTurnSpy.callCount).equals(1);
+        chai.expect(playerTwoStartTurnSpy.callCount).equals(0);
+        chai.expect(playerOneTurnFinishedSpy.callCount).equals(1);
+        chai.expect(playerTwoTurnFinishedSpy.callCount).equals(0);
+        chai.expect(playerOneTileClickedSpy.callCount).equals(0);
+        chai.expect(playerTwoTileClickedSpy.callCount).equals(0);
+
+        // click a tile
+        controller.tileClicked(2, 2);        
+
+        // no more interaction should happen
+        chai.expect(playerOneStartTurnSpy.callCount).equals(1);
+        chai.expect(playerTwoStartTurnSpy.callCount).equals(0);
+        chai.expect(playerOneTurnFinishedSpy.callCount).equals(1);
+        chai.expect(playerTwoTurnFinishedSpy.callCount).equals(0);
+        chai.expect(playerOneTileClickedSpy.callCount).equals(0);
+        chai.expect(playerTwoTileClickedSpy.callCount).equals(0);
+     }
+
+    @test "after the game is won - players can't interact anymore with the game 2"() {
+        var view:View = <View><any>{
+            initialize() : void {}
+        }        
+        var model:Model = new Model();
+        var standard:Standard = new Standard();
+        standard.setModel(model);
+        standard.setView(view);
+        var controller:Controller = new Controller(standard);
+        var player1:Player = this.createPlayer(false, model)
+        var player2:Player = this.createPlayer(false, model)
+        
+        var playerOneStartTurnSpy = sinon.spy(player1, 'startTurn');
+        var playerTwoStartTurnSpy = sinon.spy(player2, 'startTurn');
+        var playerOneTurnFinishedSpy = sinon.spy(player1, 'isTurnFinished');
+        var playerTwoTurnFinishedSpy = sinon.spy(player2, 'isTurnFinished');
+        var playerOneTileClickedSpy = sinon.spy(player1, 'tileClicked');
+        var playerTwoTileClickedSpy = sinon.spy(player2, 'tileClicked');        
+        controller.setPlayers(player1, player2);
+
+        // start the game
+        controller.initialize();
+        controller.startTurnOfCurrentPlayer();
+
+        // win the game
+        model.getTile(0, 0).setState(TileState.Circle);
+        model.getTile(1, 1).setState(TileState.Circle);
+        model.getTile(2, 2).setState(TileState.Circle);
+
+        // no more interaction should happen
+        chai.expect(playerOneStartTurnSpy.callCount).equals(1);
+        chai.expect(playerTwoStartTurnSpy.callCount).equals(0);
+        chai.expect(playerOneTurnFinishedSpy.callCount).equals(1);
+        chai.expect(playerTwoTurnFinishedSpy.callCount).equals(0);
+        chai.expect(playerOneTileClickedSpy.callCount).equals(0);
+        chai.expect(playerTwoTileClickedSpy.callCount).equals(0);
+
+        // click a tile
+        controller.startTurnOfCurrentPlayer();       
+
+        // no more interaction should happen
+        chai.expect(playerOneStartTurnSpy.callCount).equals(1);
+        chai.expect(playerTwoStartTurnSpy.callCount).equals(0);
+        chai.expect(playerOneTurnFinishedSpy.callCount).equals(1);
+        chai.expect(playerTwoTurnFinishedSpy.callCount).equals(0);
+        chai.expect(playerOneTileClickedSpy.callCount).equals(0);
+        chai.expect(playerTwoTileClickedSpy.callCount).equals(0);
+     }
 }

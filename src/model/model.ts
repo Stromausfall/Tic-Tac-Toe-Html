@@ -82,7 +82,7 @@ export class Model extends Observable implements ModelView, ModelController {
     }
 
     private checkForNoWin():void {
-        // can only happen if the game is still ongoing
+        // only if the game is still ongoing
         if (this._gameState == GameState.ONGOING) {
             var allAreOwned:boolean = true;
 
