@@ -11,16 +11,8 @@ import {Standard} from './standard/standard'
 import {ImageConstants} from './view/image-constants';
 import {StandardController} from './standard/standard-controller'
 
-
-  function listener() {
-console.debug("just clicked!");
-}
-
 class SimpleGame {
   game: Phaser.Game;
-  logo: Phaser.Sprite;
-  cursors: Phaser.CursorKeys;
-
   standard:Standard;
 
   constructor() {
@@ -28,62 +20,33 @@ class SimpleGame {
   }
 
   preload() {
-    this.game.load.image("logo", "./assets/images/mushroom2.png");
-
-    
     this.game.load.image(ImageConstants.TILE_EMPTY, ImageConstants.TILE_EMPTY_FILE);
     this.game.load.image(ImageConstants.TILE_CROSS, ImageConstants.TILE_CROSS_FILE);
     this.game.load.image(ImageConstants.TILE_CIRCLE,  ImageConstants.TILE_CIRCLE_FILE);
   }
 
   create() {
+    // the DI container
     this.standard = new Standard();
 
+    // initialize the layers
     var model:Model = new Model();
     var view:View = new View(this.standard);
     var controller:Controller = new Controller(this.standard);
 
+    // store the layers in the DI container
     this.standard.setGame(this.game);
     this.standard.setController(controller);
     this.standard.setModel(model);
+    this.standard.setView(view);
 
-
-
+    // start the game
     controller.initialize();
-
-
-//this.game.stage.backgroundColor = "#FFFFFF";
-    var y:StandardController = null;
-
-    this.logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, "logo");
-
-    this.logo.inputEnabled = true;
-    this.logo.input.pixelPerfectClick = true;
-
-    this.logo.anchor.setTo(0.5, 0.5);
-    this.cursors = this.game.input.keyboard.createCursorKeys();
-
-    this.logo.events.onInputDown.add(() => { this.listener2(); }, this);
-    this.logo.events.onInputDown.add(listener, this);
-    this.logo.events.onInputDown.add(listener, this);
-    this.logo.events.onInputDown.add(() => { console.debug("oi oi !") }, this);
+    controller.startTurnOfCurrentPlayer();
   }
-
-   listener2() {
-console.debug("just clicked2!");
-}
-
+  
   update() {
     this.game.input.update();
-
-    if (this.cursors.down.isDown)
-      this.logo.position.y += 10;
-    if (this.cursors.up.isDown)
-      this.logo.position.y -= 10;
-    if (this.cursors.left.isDown)
-      this.logo.position.x -= 10;
-    if (this.cursors.right.isDown)
-      this.logo.position.x += 10;
   }
 }
 
