@@ -29,6 +29,6 @@ export class HumanPlayer implements Player {
     }
 
     startTurn():void {
-
+        this._turnFinished = false;
     }
 }
