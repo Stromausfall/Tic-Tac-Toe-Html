@@ -1,3 +1,3 @@
-# Tic-Tac-Toe
+# Tic-Tac-Toe [finished]
 
-using Typescript and Phaser
+using MVC, TDD (mocha, sinon, chai), Typescript, Webpack and Phaser

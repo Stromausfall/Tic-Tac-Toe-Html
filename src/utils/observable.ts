@@ -1,6 +1,7 @@
 import * as Collections from 'typescript-collections';
+import {ObservableElement} from './observable-element';
 
-export class Observable {
+export class Observable implements ObservableElement {
     private _toNotify:Collections.Set<Function> = new Collections.Set<Function>();
 
     addObserver(toNotify:Function) {

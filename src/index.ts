@@ -7,9 +7,14 @@ import * as Phaser from 'phaser';
 import {View} from './view/view'
 import {Controller} from './controller/controller';
 import {Model} from './model/model';
-import {Standard} from './standard/standard'
+import {Standard} from './standard/standard';
 import {ImageConstants} from './view/image-constants';
-import {StandardController} from './standard/standard-controller'
+import {StandardController} from './standard/standard-controller';
+import {TileState} from './model/tile/tile-state';
+import {Player} from './controller/player/player';
+import {HumanPlayer} from './controller/player/human-player';
+import {ComputerPlayer} from './controller/player/computer-player';
+
 
 class SimpleGame {
   game: Phaser.Game;
@@ -39,6 +44,11 @@ class SimpleGame {
     this.standard.setController(controller);
     this.standard.setModel(model);
     this.standard.setView(view);
+
+    // choose the players for the game
+    var player1:Player = new HumanPlayer(model, TileState.Cross);
+    var player2:Player = new ComputerPlayer(model, TileState.Circle);
+    controller.setPlayers(player1, player2);
 
     // start the game
     controller.initialize();
